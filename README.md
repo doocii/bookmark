@@ -50,6 +50,21 @@ RewriteRule ^m/([0-9]+)$ /m/?do=User_Index&uid=$1&%{QUERY_STRING} [L]
 * QQ：<http://connect.qq.com/intro/login>
 * 百度：<http://developer.baidu.com/ms/oauth>
 
+1.修改第三方登录配置
+```
+root/config/oauth.php
+```
+2.在nginx/apache等环境中添加重写规则，如下给出nginx重写规则示例：
+
+```
+rewrite ^/login/(weibo|qq|baidu)/callback$ /?do=User_LoginCallback&type=$1&$args last;
+
+```
+
+3.在QQ互联的管理中心修改应用回调地址
+为：`http://<你的域名>/login/qq/callback` ，同时，其他登录方式回调地址也需要进行相应修改。
+
+
 ## 新浪SAE配置说明
 
 * 数据库表请使用SAE提供的`PHPMyAdmin`导入；
