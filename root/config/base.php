@@ -19,10 +19,15 @@ $config["db"]["default"] = array(
 // 网站地址重写
 switch (App::getName()) {
     case "public":
-        $config["rewriteRules"] = array();
+        $config["rewriteRules"] = array(
+            "User_Index" => "/[uid]",
+            "User_LoginCallback" => "http://{$_SERVER['HTTP_HOST']}/login/[type]/callback"
+        );
         break;
     case "mobile":
-        $config["rewriteRules"] = array();
+        $config["rewriteRules"] = array(
+            "User_Index" => "/m/[uid]",
+        );
         break;
 }
 // 网站描述
